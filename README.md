@@ -1,10 +1,10 @@
-# Youtube Media Fetcher
+# Youtube Media Fetcher v1.0.1
 
 A simple desktop app to download YouTube videos and playlists as MP4 or MP3.
 
 ## Requirements
 
-- Python 3.x
+- Python 3.x (auto-installed via `winget` if missing, when launched via `launch.bat`)
 - `yt-dlp` (auto-installed if missing)
 - `ffmpeg` (required for MP3 conversion and video merging — the app will prompt to install it via `winget` if missing)
 
