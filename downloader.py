@@ -3,15 +3,20 @@ from tkinter import filedialog, messagebox, ttk
 import threading
 import shutil
 import subprocess
+import sys
 
 try:
     import yt_dlp
 except Exception:
-    subprocess.run(["pip", "install", "yt-dlp"])
-    import yt_dlp
+    try:
+        subprocess.run(["pip", "install", "yt-dlp"])
+        import yt_dlp
+    except Exception:
+        subprocess.run(["py", "-m", "pip", "install", "yt-dlp"])
+        import yt_dlp
 
 
-def check_ffmpeg():
+def check_ffmpeg(root):
     if shutil.which("ffmpeg") is None:
         answer = messagebox.askyesno(
             "ffmpeg not found",
@@ -19,7 +24,9 @@ def check_ffmpeg():
         )
         if answer:
             subprocess.run(["winget", "install", "--id", "Gyan.FFmpeg", "-e"], shell=True)
-            messagebox.showinfo("ffmpeg", "Installation complete. You may need to restart the app.")
+            messagebox.showinfo("ffmpeg", "Installation complete. Please relaunch the app.")
+            root.destroy()
+            sys.exit(0)
         else:
             messagebox.showwarning("ffmpeg", "MP3 conversion and video merging may not work without ffmpeg.")
 
@@ -117,8 +124,8 @@ def browse_folder(folder_var):
 
 
 def build_ui():
-    check_ffmpeg()
     root = tk.Tk()
+    check_ffmpeg(root)
     root.title("Youtube Media Fetcher")
     root.resizable(False, False)
 
