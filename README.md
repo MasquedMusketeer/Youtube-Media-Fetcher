@@ -1,4 +1,4 @@
-# Youtube Media Fetcher v1.0.1
+# Youtube Media Fetcher v1.0.2
 
 A simple desktop app to download YouTube videos and playlists as MP4 or MP3.
 
